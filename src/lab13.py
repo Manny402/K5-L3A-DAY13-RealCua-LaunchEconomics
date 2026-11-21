@@ -243,6 +243,18 @@ def in_bang_d(reqs):
     print(f'tỉ lệ làm lại trong phạm vi: {lam_lai_pv * 100:.1f}%')
 
 
+# ---------- Nhiệm vụ E1 · Tính thử ba chỉ số ----------
+def in_chi_so(reqs):
+    print('\n=== E1 · Ba chỉ số trong đợt chạy thử (không có nhóm đối chứng) ===')
+    chinh = (reqs['dong_trong_24h'] == 1) & (reqs['mo_lai_trong_7_ngay'] == 0)
+    xem = reqs[reqs['duoc_xem_lai'] == 1]
+    bo_qua = xem['quyet_dinh_xem_lai'].isin(['sua', 'bo'])
+    an_toan = reqs['mo_lai_trong_7_ngay'] == 1
+    print(f'Chính  · đóng 24h, không mở lại 7 ngày : {chinh.mean() * 100:.2f}% ({chinh.sum()}/{len(reqs)})')
+    print(f'Dùng   · bỏ qua gợi ý (sua + bo)       : {bo_qua.mean() * 100:.2f}% ({bo_qua.sum()}/{len(xem)})')
+    print(f'An toàn· mở lại trong 7 ngày           : {an_toan.mean() * 100:.2f}% ({an_toan.sum()}/{len(reqs)})')
+
+
 if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
@@ -252,3 +264,4 @@ if __name__ == '__main__':
     in_bang_a4(runs, reqs)
     in_bang_b(runs, reqs)
     in_bang_d(reqs)
+    in_chi_so(reqs)
