@@ -14,7 +14,7 @@
 |   1 | Nguyễn Phú Nam (nhóm trưởng) | 2A202603501 | 145128129+Manny402@users.noreply.github.com | [Manny402](https://github.com/Manny402) | Người viết code (nhiệm vụ A, B) |
 |   2 | Nguyễn Hoàng | 2A202603447 | 185824992+gauronaldo@users.noreply.github.com | [gauronaldo](https://github.com/gauronaldo) | Người kiểm số; người viết code nhiệm vụ D |
 |   3 | Trương Hoàng Tùng | 2A202603651 | 186200067+Dobit25@users.noreply.github.com | [Dobit25](https://github.com/Dobit25) | Người gắn nhãn 1 |
-|   4 | Trịnh Thanh Tùng | 2A202603456 | 129481785+TgTrh06@users.noreply.github.com | [TgTrh06](https://github.com/TgTrh06) | Người gắn nhãn 2, kiêm giữ hồ sơ |
+|   4 | Trịnh Thanh Tùng | 2A202603456 | 26ai.tungtt2@vinuni.edu.vn | [TgTrh06](https://github.com/TgTrh06) | Người gắn nhãn 2, kiêm giữ hồ sơ |
 
 Bốn vai của lab:
 
