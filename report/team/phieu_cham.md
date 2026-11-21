@@ -16,6 +16,6 @@ Nhóm số n chấm nhóm số n + 1; nhóm cuối chấm nhóm 1. Chấm theo b
 
 **Lý do:** Đề xuất khớp với số của chính nhóm và không giấu con số bất lợi nào (power 0,64; xem lại 100% là 1,03× [simulated]). Pilot tách được tác động với 20 cụm mỗi nhóm, ngưỡng an toàn đặt theo tỉ lệ mở lại hiện tại 3,97–4,25% nên không dừng oan ngay tuần đầu. Hai điểm cần theo dõi: (1) lịch rất sát, hai điều kiện hạn 22/11 trong khi pilot bắt đầu 23/11; (2) bảng khắc phục dùng event `input_validation_failed` (ca 9) nhưng event này chưa có trong danh sách event của `chi_so.md`, nên cách phát hiện cho ca 9 chưa đo được.
 
-**Một câu hỏi cho đội trình:** Nếu đến 22/11 khoá chống hoàn trùng chưa kiểm xong hoặc Giám đốc vận hành chưa ký MDE 6 điểm, nhóm lùi ngày bắt đầu và ngày quyết định 28/12 thế nào, và mỗi nhân viên còn đạt ít nhất 299 yêu cầu trong cửa sổ đo không?
+**Một câu hỏi cho đội trình:** Vì sao nhóm chia pilot theo nhân viên mà không chia theo depot, dù chia theo depot dễ triển khai hơn?
 
-**Câu trả lời của đội trình (ghi lại tại buổi):** ...
+**Câu trả lời của đội trình (ghi lại tại buổi):** Chia theo depot chỉ được 6 depot mỗi nhóm, nên cỡ mẫu hiệu dụng tối đa là 6 / 0,02 = 300, quá xa mức 859 cần cho chênh lệch 6 điểm. Số cụm cũng chỉ có 6, dưới mức tối thiểu 20. Chia theo nhân viên thì được 20 cụm mỗi nhóm, và với ít nhất 299 yêu cầu mỗi người thì đạt 859 hiệu dụng mỗi nhóm.
