@@ -1,8 +1,10 @@
 # Phiếu chấm hội đồng Gate 2a
 
+> **Trạng thái: chưa thực hiện.** Phần duyệt chéo cần nhóm n + 1 gửi hồ sơ cho nhóm mình chấm. Nhóm chưa nhận được hồ sơ để chấm, nên phiếu này để trống và sẽ được điền sau buổi duyệt chéo.
+
 Nhóm số n chấm nhóm số n + 1; nhóm cuối chấm nhóm 1. Chấm theo bằng chứng trong hồ sơ, không theo cách trình bày: một đề xuất No-go có lý do bằng số được điểm cao hơn một đề xuất Go bỏ qua con số bất lợi.
 
-- Nhóm chấm (hội đồng): ...
+- Nhóm chấm (hội đồng): RealCua (L3A)
 - Nhóm được chấm: ...
 
 | Tiêu chí | 0 điểm | 5 điểm | 10 điểm | Điểm | Lý do (có số) |
