@@ -187,6 +187,62 @@ def in_bang_b(runs, reqs):
               f'{cps / BASELINE:.2f}×, hoà vốn khi xem lại ≤ {hoa_von:.1f} phút')
 
 
+# ---------- Nhiệm vụ D1 · Cỡ mẫu pilot ----------
+ICC = 0.02
+P_BASELINE = 0.70
+
+
+def co_mau(p1, p2, alpha=0.05, power=0.8):
+    """Cỡ mẫu mỗi nhóm khi so hai tỉ lệ (công thức z, hai phía)."""
+    from statistics import NormalDist
+    za = NormalDist().inv_cdf(1 - alpha / 2)
+    zb = NormalDist().inv_cdf(power)
+    pb = (p1 + p2) / 2
+    tu = za * math.sqrt(2 * pb * (1 - pb)) + zb * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))
+    return math.ceil(tu ** 2 / (p2 - p1) ** 2)
+
+
+def he_so_thiet_ke(m, icc=ICC):
+    return 1 + (m - 1) * icc
+
+
+def in_bang_d(reqs):
+    print('\n=== D1 · Cỡ mẫu (baseline 0,70; alpha 0,05; power 0,8; ICC 0,02) ===')
+    n5 = co_mau(P_BASELINE, P_BASELINE + 0.05)
+    n6 = co_mau(P_BASELINE, P_BASELINE + 0.06)
+    print(f'a) chia theo yêu cầu, +5 điểm : {n5} yêu cầu mỗi nhóm (+6 điểm: {n6})')
+
+    de_b = he_so_thiet_ke(75)
+    n_b = math.ceil(n5 * de_b)
+    nv_b = math.ceil(n_b / 75)
+    print(f'b) theo nhân viên, m = 75     : DE {de_b:.2f}, {n_b} yêu cầu mỗi nhóm, '
+          f'{nv_b} nhân viên mỗi nhóm, tổng {2 * nv_b} > 40 → không đủ người')
+
+    tran_c = 20 / ICC
+    print(f'c) 20 nhân viên mỗi nhóm      : cỡ mẫu hiệu dụng tối đa {tran_c:,.0f} < {n5} → không đạt')
+    print(f'd) 6 depot mỗi nhóm           : cỡ mẫu hiệu dụng tối đa {6 / ICC:,.0f}')
+
+    # e) 20·m / (1 + (m−1)·ICC) ≥ n6  →  m ≥ n6·(1−ICC) / (20 − n6·ICC)
+    m_e = math.ceil(n6 * (1 - ICC) / (20 - n6 * ICC))
+    print(f'e) +6 điểm, 20 nhân viên/nhóm : m ≥ {m_e} yêu cầu mỗi nhân viên, DE {he_so_thiet_ke(m_e):.2f}')
+
+    from statsmodels.stats.power import NormalIndPower
+    from statsmodels.stats.proportion import proportion_effectsize
+    es5 = proportion_effectsize(P_BASELINE + 0.05, P_BASELINE)
+    power_thuc = NormalIndPower().power(effect_size=es5, nobs1=n6, alpha=0.05)
+    n_sm = NormalIndPower().solve_power(effect_size=es5, alpha=0.05, power=0.8)
+    print(f'   kiểm tra statsmodels: n(+5 điểm) = {n_sm:,.0f}; power nếu tác động thật chỉ +5 điểm với n = {n6}: {power_thuc:.2f}')
+
+    print('\n=== D3 · Tỉ lệ mở lại trong 7 ngày hiện tại ===')
+    pv = reqs[reqs['loai'].isin(PHAM_VI_PILOT)]
+    print(f'toàn mẫu: {reqs["mo_lai_trong_7_ngay"].mean() * 100:.2f}% '
+          f'({reqs["mo_lai_trong_7_ngay"].sum()}/{len(reqs)}); '
+          f'phạm vi noi_dia + hang_nang: {pv["mo_lai_trong_7_ngay"].mean() * 100:.2f}% '
+          f'({pv["mo_lai_trong_7_ngay"].sum()}/{len(pv)})')
+    lam_lai_pv = (pv['ket_qua'] == 'lam_lai').mean()
+    print(f'tỉ lệ làm lại trong phạm vi: {lam_lai_pv * 100:.1f}%')
+
+
 if __name__ == '__main__':
     runs = pd.read_csv('logix_runs.csv')
     reqs = pd.read_csv('logix_requests.csv', keep_default_na=False)
@@ -195,3 +251,4 @@ if __name__ == '__main__':
     in_bang_a3(runs, reqs)
     in_bang_a4(runs, reqs)
     in_bang_b(runs, reqs)
+    in_bang_d(reqs)
